@@ -19,7 +19,7 @@ def listAudios(firstlist):
 #Funktion zum Einlesen einer Audiodatei aus Ordner
 def readInAudio(folder, file):
     filename, file_extension = os.path.splitext(file)
-    y, sr = librosa.load(folder + '/' + file)
+    y, sr = librosa.load(folder + '/' + file, mono = True)
     return (y, sr, filename)
 
 #Funktion zum Einlesen einer Audiodatei aus Dateipfad

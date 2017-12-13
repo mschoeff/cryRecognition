@@ -28,8 +28,8 @@ def displayAudio(numPlots, y, sr, filename):
 def displaySpectrogram(pr, numPlots, y, sr, filename, displayOperations):
     S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), hop_length=calcSamples(pr.hop_length,sr),
                      win_length=calcSamples(pr.win_length,sr))
-    D = librosa.amplitude_to_db(S, ref=pr.dispRef)
-
+    #D = librosa.amplitude_to_db(S, ref=pr.dispRef)
+    D = (S ** 2) / pr.n_fft
     if displayOperations.dispAudio:
         mp.subplot(numPlots, 1, 2)
     else:
@@ -41,7 +41,10 @@ def displaySpectrogram(pr, numPlots, y, sr, filename, displayOperations):
 
 #Funktion um Mel-Spektrogramm darzustellen
 def displayMelSpectrogram(pr, numPlots, y, sr, filename, displayOperations):
-    M = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
+    S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), hop_length=calcSamples(pr.hop_length,sr),
+                     win_length=calcSamples(pr.win_length,sr))
+    S = (S ** 2) / pr.n_fft
+    M = librosa.feature.melspectrogram(S=S, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
                                        hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mels = pr.n_mels)
     if displayOperations.dispSpec and displayOperations.dispAudio:
         mp.subplot(numPlots, 1, 3)
@@ -49,7 +52,7 @@ def displayMelSpectrogram(pr, numPlots, y, sr, filename, displayOperations):
         mp.subplot(numPlots, 1, 2)
     else:
         mp.subplot(numPlots, 1, 1)
-    libdisp.specshow(librosa.power_to_db(M, ref=pr.dispRef), cmap='gray_r', y_axis='mel') #, x_axis='time'
+    libdisp.specshow(M, cmap='gray_r', y_axis='mel') #, x_axis='time'
     mp.colorbar(orientation='horizontal', format='%+2.0f dB')
     mp.title(filename + ' - ' + 'Mel' + ' power spectrogram')
     return None

@@ -19,15 +19,16 @@ def extractAndSave(extractionFunctions, pr, inputFolder, outputFolder, file):
         #np.save(datafile, S)
 
     if extractionFunctions.saveMelSpec:
-
-        M = librosa.feature.melspectrogram(y=y, sr=sr, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
+        S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), calcSamples(pr.hop_length, sr),
+                         calcSamples(pr.win_length, sr))
+        M = librosa.feature.melspectrogram(S=S, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
                                            hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mels = pr.n_mels)
         #datafile = open(outputFolder + '/MEL_Data/' + filename + '_MEL_data', 'wb')
         #np.save(datafile, M)
 
     if extractionFunctions.saveMFCCs:
         F = librosa.feature.mfcc(y=y, sr=sr, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
-                                 hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mels = pr.n_mels)
+                                 hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mfcc = pr.mfccs)
         #datafile = open(outputFolder + '/MFCC_Data/' + filename + '_MFCCs', 'wb')
         #np.save(datafile, F)
 

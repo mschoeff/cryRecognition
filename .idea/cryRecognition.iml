@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Featureextraktionsfunktionen" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Helper" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Darstellungsfunktionen" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Berechnungsfunktionen" isTestSource="false" />
     </content>
     <orderEntry type="jdk" jdkName="Python 2.7.12 (/usr/bin/python2.7)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

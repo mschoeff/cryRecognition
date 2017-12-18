@@ -2,16 +2,17 @@ import os
 import librosa
 
 
-#Funktion zur Auflistung der Dateien im Verzeichnis
-def listFiles(folder):
-    '''returns list with filenames in folder'''
-    return os.listdir(folder)
+# #Funktion zur Auflistung der Dateien im Verzeichnis
+# def listFiles(folder):
+#     '''returns list with filenames in folder'''
+#     return os.listdir(folder)
 
 #Funktion zur Extraktion der Audiodateien in einer Liste
-def listAudios(firstlist):
+def listAudios(folder):
     '''returns a new list containing only the audio files of firstlist'''
+    firstList = os.listdir(folder)
     audioList = []
-    for file in firstlist:
+    for file in firstList:
         if file.endswith('.mp3') or file.endswith('.wav'):
             audioList.append(file)
     return audioList
@@ -27,3 +28,4 @@ def readInAudioDirectly(filepath):
     y, sr = librosa.load(filepath)
     filename, file_extension = os.path.splitext(filepath)
     return (y, sr, filename)
+

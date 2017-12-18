@@ -8,7 +8,7 @@ def computeSpectrum(y, parameter):
 
 def computeMelSpectrum(y, parameter):
     S = computeSpectrum(y, parameter)
-    M = librosa.feature.melspectrogram(S=S, power = parameter.power, n_mels = parameter.power)
+    M = librosa.feature.melspectrogram(S=S, power = parameter.power, n_mels = parameter.n_mels)
     return M
 
 def computeMFCC(y, parameter):

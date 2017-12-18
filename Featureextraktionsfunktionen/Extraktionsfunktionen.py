@@ -3,48 +3,54 @@ from CreateFolders import *
 from InOut import *
 from ParameterCheck import *
 from getOperations import *
+from computeSpectralFeatures import *
+from Normalisierungsfunktionen import *
 
 #Funktion zur Durchfuehrung der spezifischen Extraktion und Speicherung der Daten
-def extractAndSave(extractionFunctions, pr, inputFolder, outputFolder, file):
+def extractionOfFeatures(extractionFunctions, pr, inputFolder, file):
     y, sr, filename = readInAudio(inputFolder, file)
-
-    #checkParamterIntegrity()
-    #hoplength
-
+    S, M, F = 0
     #FactoryPattern googeln
     if extractionFunctions.saveSpec:
-        S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), calcSamples(pr.hop_length, sr),
-                         calcSamples(pr.win_length, sr))
-        #datafile = open(outputFolder + '/STFT_Data/' + filename + '_STFT_data', 'wb')
-        #np.save(datafile, S)
+        S = computeSpectrum(y, pr)
 
     if extractionFunctions.saveMelSpec:
-        S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), calcSamples(pr.hop_length, sr),
-                         calcSamples(pr.win_length, sr))
-        M = librosa.feature.melspectrogram(S=S, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
-                                           hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mels = pr.n_mels)
-        #datafile = open(outputFolder + '/MEL_Data/' + filename + '_MEL_data', 'wb')
-        #np.save(datafile, M)
+        M = computeMelSpectrum(y, pr)
 
     if extractionFunctions.saveMFCCs:
-        F = librosa.feature.mfcc(y=y, sr=sr, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
-                                 hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mfcc = pr.mfccs)
-        #datafile = open(outputFolder + '/MFCC_Data/' + filename + '_MFCCs', 'wb')
-        #np.save(datafile, F)
+        F = computeMFCC(y. pr)
 
-    #save(MFCC)
+    return (S, M, F, filename)
+
+#Funktion zur Abspeicherung der extrahierten Features
+def saveFeatures(S, M, F, extractionFunctions, outputFolder, filename):
+
+    if extractionFunctions.saveSpec:
+        datafile = open(outputFolder + '/STFT_Data/' + filename + '_STFT_data', 'wb')
+        np.save(datafile, S)
+
+    if extractionFunctions.saveMelSpec:
+        datafile = open(outputFolder + '/MEL_Data/' + filename + '_MEL_data', 'wb')
+        np.save(datafile, M)
+
+    if extractionFunctions.saveMFCCs:
+        datafile = open(outputFolder + '/MFCC_Data/' + filename + '_MFCCs', 'wb')
+        np.save(datafile, F)
+
     return None
+
 
 #Extraktionsfunktion
 def extract(inputFolder, outputFolder, parameter, stringList):
-    #anmerkung spaeter
-    #checkInputParameterIntegry(stringList)
 
-    operationString = capitalizeStrings(stringList)
-    extractionFunctions = getExtractionOperations(operationString)
-    audioList = listAudios(listFiles(inputFolder))
+    extractionFunctions = checkExtractionParameterIntegrity(stringList, parameter)
+    audioList = listAudios(inputFolder)
     createOutPutFolders(outputFolder, extractionFunctions)
+    MFCCMatrix = createMFCCMatrix(audioList, parameter)
+    for file in audioList:
+        S, M , F, filename = extractionOfFeatures(extractionFunctions, parameter, inputFolder, file)
+        addMFCCsToMFCCMatrix(MFCCMatrix, F, audioList, file, parameter)
+        saveFeatures(S, M, F, extractionFunctions, outputFolder, filename)
 
-    [extractAndSave(extractionFunctions, parameter, inputFolder, outputFolder, file) for file in audioList]
 
     return None

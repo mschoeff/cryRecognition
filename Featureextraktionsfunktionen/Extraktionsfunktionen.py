@@ -9,7 +9,7 @@ from Normalisierungsfunktionen import *
 #Funktion zur Durchfuehrung der spezifischen Extraktion und Speicherung der Daten
 def extractionOfFeatures(extractionFunctions, pr, inputFolder, file):
     y, sr, filename = readInAudio(inputFolder, file)
-    S, M, F = 0
+    #S, M, F = 0
     #FactoryPattern googeln
     if extractionFunctions.saveSpec:
         S = computeSpectrum(y, pr)
@@ -18,7 +18,7 @@ def extractionOfFeatures(extractionFunctions, pr, inputFolder, file):
         M = computeMelSpectrum(y, pr)
 
     if extractionFunctions.saveMFCCs:
-        F = computeMFCC(y. pr)
+        F = computeMFCC(y, pr)
 
     return (S, M, F, filename)
 
@@ -48,9 +48,9 @@ def extract(inputFolder, outputFolder, parameter, stringList):
     createOutPutFolders(outputFolder, extractionFunctions)
     MFCCMatrix = createMFCCMatrix(audioList, parameter)
     for file in audioList:
-        S, M , F, filename = extractionOfFeatures(extractionFunctions, parameter, inputFolder, file)
-        addMFCCsToMFCCMatrix(MFCCMatrix, F, audioList, file, parameter)
+        S, M, F, filename = extractionOfFeatures(extractionFunctions, parameter, inputFolder, file)
+        #addMFCCsToMFCCMatrix(MFCCMatrix, F, audioList, file, parameter)
         saveFeatures(S, M, F, extractionFunctions, outputFolder, filename)
-
+    calcNormalizationFactor(MFCCMatrix, outputFolder)
 
     return None

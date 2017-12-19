@@ -3,7 +3,7 @@ from Displayfunktionen import display
 
 ## Parametereingabe zur Darstellung
 
-n_fft = 512 #Werte fuer FFT [Samples]
+n_fft = 1024 #Werte fuer FFT [Samples]
 win_length = 10 #Fenstergroesse fuer FFT [Milli-Sekunden]
 hop_length = 10 #Sprungweite fuer FFT [Milli-Sekunden]
 freq_Axis = "linear" #Frequenzachse "linear" oder "log"
@@ -23,4 +23,10 @@ file = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios/testfile.wav'
 plots = ["Audio", "Spektrum", "Melspektrum"]
 
 
-display(file, displayParameter, plots)
+#display(file, displayParameter, plots)
+
+def main():
+
+    display(file, displayParameter, plots)
+
+main()

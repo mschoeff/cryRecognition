@@ -1,4 +1,4 @@
-from getOperations import capitalizeStrings, getExtractionOperations
+from getOperations import capitalizeStrings, getExtractionOperations, getDisplayOperations
 
 #Funktion um Sampleanzahl aus gegebener Zeitdauer und Samplingrate zu berechnen
 def calcSamples(time, sr):
@@ -21,14 +21,14 @@ def checkExtractionParameterIntegrity(stringList, parameter):
     parameter.hop_length = calcSamples(parameter.hop_length, 22050)
     parameter.win_length = calcSamples(parameter.win_length, 22050)
 
-    return extractionFunctions
+    return (extractionFunctions, parameter)
 
 #Funktion generiert auszufuehrende Darstellungs-Operationen und ueberprueft Parameter
 def checkDisplayParameterIntegrity(stringList, parameter):
     operationString = capitalizeStrings(stringList)
-    displayFunctions = getExtractionOperations(operationString)
+    displayFunctions = getDisplayOperations(operationString)
     parameter.n_fft = checkFFTSamples(parameter.n_fft, parameter.win_length, 22050) #sr ist set to 22050 as default
     parameter.hop_length = calcSamples(parameter.hop_length, 22050)
     parameter.win_length = calcSamples(parameter.win_length, 22050)
 
-    return displayFunctions
+    return (displayFunctions, parameter)

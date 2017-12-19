@@ -4,7 +4,7 @@ import numpy as np
 from InOut import *
 from ParameterCheck import *
 from getOperations import *
-
+from computeSpectralFeatures import *
 #Funktion um Anzahl der Plots zu berechnen
 def numberOfPlots(displayOperations):
     numPlots = 0
@@ -26,10 +26,7 @@ def displayAudio(numPlots, y, sr, filename):
 
 #Funktion um Spektrogramm darzustellen
 def displaySpectrogram(pr, numPlots, y, sr, filename, displayOperations):
-    S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), hop_length=calcSamples(pr.hop_length,sr),
-                     win_length=calcSamples(pr.win_length,sr))
-    #D = librosa.amplitude_to_db(S, ref=pr.dispRef)
-    D = (S ** 2) / pr.n_fft
+    D = computeSpectrum(y, pr)
     if displayOperations.dispAudio:
         mp.subplot(numPlots, 1, 2)
     else:
@@ -41,11 +38,7 @@ def displaySpectrogram(pr, numPlots, y, sr, filename, displayOperations):
 
 #Funktion um Mel-Spektrogramm darzustellen
 def displayMelSpectrogram(pr, numPlots, y, sr, filename, displayOperations):
-    S = librosa.stft(y, checkFFTSamples(pr.n_fft, pr.win_length, sr), hop_length=calcSamples(pr.hop_length,sr),
-                     win_length=calcSamples(pr.win_length,sr))
-    S = (S ** 2) / pr.n_fft
-    M = librosa.feature.melspectrogram(S=S, n_fft=checkFFTSamples(pr.n_fft, pr.win_length, sr),
-                                       hop_length=calcSamples(pr.hop_length,sr), power=pr.power, n_mels = pr.n_mels)
+    M = computeMelSpectrum(y, pr)
     if displayOperations.dispSpec and displayOperations.dispAudio:
         mp.subplot(numPlots, 1, 3)
     elif displayOperations.dispSpec and displayOperations.dispAudio == False:
@@ -60,6 +53,9 @@ def displayMelSpectrogram(pr, numPlots, y, sr, filename, displayOperations):
 
 #Darstellungsfunktion
 def display(filepath, displayParameter, stringList):
+
+
+    displayFunctions, parameter = checkDisplayParameterIntegrity(stringList, displayParameter)
 
     operationString = capitalizeStrings(stringList)
     displayFunctions = getDisplayOperations(operationString)

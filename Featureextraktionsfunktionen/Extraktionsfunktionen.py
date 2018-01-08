@@ -5,10 +5,11 @@ from ParameterCheck import *
 from getOperations import *
 from computeSpectralFeatures import *
 from Normalisierungsfunktionen import *
-
+import parameter
 #Funktion zur Durchfuehrung der spezifischen Extraktion und Speicherung der Daten
 def extractionOfFeatures(extractionFunctions, pr, inputFolder, file):
     y, sr, filename = readInAudio(inputFolder, file)
+    print(len(y))
     #S, M, F = 0
     #FactoryPattern googeln
     if extractionFunctions.saveSpec:
@@ -43,7 +44,13 @@ def saveFeatures(S, M, F, extractionFunctions, outputFolder, filename):
 #Extraktionsfunktion
 def extract(inputFolder, outputFolder, parameter, stringList):
 
-    extractionFunctions = checkExtractionParameterIntegrity(stringList, parameter)
+    #extractionFunctions, extrparameter = checkExtractionParameterIntegrity(stringList, parameter)
+    #extractionFunctions = checkExtractionParameterIntegrity(stringList, parameter)
+
+    extractionFunctions = getExtractionOperations(capitalizeStrings(stringList))
+
+    parameter.checkIntegrity()
+
     audioList = listAudios(inputFolder)
     createOutPutFolders(outputFolder, extractionFunctions)
     MFCCMatrix = createMFCCMatrix(audioList, parameter)

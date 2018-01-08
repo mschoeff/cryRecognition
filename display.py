@@ -1,5 +1,6 @@
 from displayParameters import displayParameter
 from Displayfunktionen import display
+import parameter
 
 ## Parametereingabe zur Darstellung
 
@@ -13,7 +14,7 @@ power = 2 #Exponent fuer Melspektrogram, 1 = Energie, 2 = Power
 mfccs = 20 #Anzahl zu extrahierender MFCC Features
 
 #Erzeugung des Objekts zur Parameterbuendelung
-displayParameter = displayParameter(n_fft, win_length, hop_length, freq_Axis, disp_ref, n_mels, power, mfccs)
+displayParameter = parameter.Parameter(n_fft, win_length, hop_length, n_mels, power, mfccs, freq_Axis, disp_ref)
 
 #Pfad der darzustellenden Audio-Datei
 file = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios/testfile.wav'

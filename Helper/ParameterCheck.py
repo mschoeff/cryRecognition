@@ -21,7 +21,8 @@ def checkExtractionParameterIntegrity(stringList, parameter):
     parameter.hop_length = calcSamples(parameter.hop_length, 22050)
     parameter.win_length = calcSamples(parameter.win_length, 22050)
 
-    return (extractionFunctions, parameter)
+    #return (extractionFunctions, parameter)
+    return extractionFunctions
 
 #Funktion generiert auszufuehrende Darstellungs-Operationen und ueberprueft Parameter
 def checkDisplayParameterIntegrity(stringList, parameter):
@@ -31,4 +32,5 @@ def checkDisplayParameterIntegrity(stringList, parameter):
     parameter.hop_length = calcSamples(parameter.hop_length, 22050)
     parameter.win_length = calcSamples(parameter.win_length, 22050)
 
-    return (displayFunctions, parameter)
+    #return (displayFunctions, parameter)
+    return displayFunctions

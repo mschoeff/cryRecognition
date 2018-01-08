@@ -1,5 +1,6 @@
 import librosa.display as libdisp
 import matplotlib.pyplot as mp
+import parameter
 import numpy as np
 from InOut import *
 from ParameterCheck import *
@@ -55,10 +56,9 @@ def displayMelSpectrogram(pr, numPlots, y, sr, filename, displayOperations):
 def display(filepath, displayParameter, stringList):
 
 
-    displayFunctions, parameter = checkDisplayParameterIntegrity(stringList, displayParameter)
+    displayParameter.checkIntegrity()
 
-    operationString = capitalizeStrings(stringList)
-    displayFunctions = getDisplayOperations(operationString)
+    displayFunctions = getDisplayOperations(capitalizeStrings(stringList))
 
     y, sr, file = readInAudioDirectly(filepath)
 

@@ -1,6 +1,10 @@
 from extractParameters import extractParameters
 from Extraktionsfunktionen import extract
 
+#________testing, to be removed
+import parameter
+#________
+
 ## Parametereingabe zur Merkmalsextraktion
 
 n_fft = 512 #Werte fuer FFT [Samples]
@@ -16,10 +20,18 @@ inputpath = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios'
 outputpath = '/home/schoeffler/PycharmProjects/DatenOrdnerTEST'
 
 # Erzeugung des Objekts zur Parameterbuendelung
-extraktionsParameter = extractParameters(n_fft, win_length, hop_length, n_mels, power, mfccs)
+extraktionsParameter = parameter.Parameter(n_fft, win_length, hop_length, n_mels, power, mfccs)
 
 def main():
 
     extract(inputpath, outputpath, extraktionsParameter, featureArt)
 
+
+    #___ t b d
+    # testparameter = parameter.Parameter(n_fft,win_length, hop_length)
+    # testparameter.sayHello()
+    # testparameter.printNFFT()
+    # testparameter.checkIntegrity()
+    # testparameter.printNFFT()
+    #___ t b d
 main()

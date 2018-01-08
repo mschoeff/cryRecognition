@@ -1,5 +1,3 @@
-
-
 class extractParameters(object):
 
     def __init__(self, n_fft, win_length, hop_length, n_mels, power, mfccs):

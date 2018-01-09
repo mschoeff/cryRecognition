@@ -2,11 +2,15 @@ class Parameter(object):
     def __init__(self, n_fft=512, win_length=40, hop_length=40, n_mels=40, power=2,
                      mfccs=20, freqAxis='linear', dispRef=512):
 
+        def convertMilliSecondsToSamples(ms, sr):
+            samples = int(ms * 0.001 * sr)  # Faktor 0.001, da Zeit [ms]
+            return samples
+
         self.n_fft = n_fft
         #values for win_length and hop_length are directly converted from [ms] to samples
         #22050 is the default sampling rate of librosa's file import
-        self.win_length = int(win_length * 0.001 * 22050)
-        self.hop_length = int(hop_length * 0.001 * 22050)
+        self.win_length = convertMilliSecondsToSamples(win_length, 22050)
+        self.hop_length = convertMilliSecondsToSamples(hop_length, 22050)
         self.n_mels = n_mels
         self.power = power
         self.mfccs = mfccs

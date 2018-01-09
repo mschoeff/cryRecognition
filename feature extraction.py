@@ -1,5 +1,5 @@
 from extractParameters import extractParameters
-from Extraktionsfunktionen import extract
+import Extraktionsfunktionen
 
 #________testing, to be removed
 import parameter
@@ -24,7 +24,7 @@ extraktionsParameter = parameter.Parameter(n_fft, win_length, hop_length, n_mels
 
 def main():
 
-    extract(inputpath, outputpath, extraktionsParameter, featureArt)
+    Extraktionsfunktionen.extract(inputpath, outputpath, extraktionsParameter, featureArt)
 
 
     #___ t b d

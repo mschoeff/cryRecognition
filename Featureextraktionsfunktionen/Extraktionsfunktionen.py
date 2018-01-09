@@ -48,7 +48,7 @@ def extract(inputFolder, outputFolder, parameter, stringList):
     #extractionFunctions = checkExtractionParameterIntegrity(stringList, parameter)
 
     extractionFunctions = getExtractionOperations(capitalizeStrings(stringList))
-
+    print (capitalizeStrings(stringList))
     parameter.checkIntegrity()
 
     audioList = listAudios(inputFolder)

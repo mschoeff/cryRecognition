@@ -1,8 +1,8 @@
-from extractParameters import extractParameters
 import Extraktionsfunktionen
+import parameter
 
 #________testing, to be removed
-import parameter
+
 #________
 
 ## Parametereingabe zur Merkmalsextraktion
@@ -14,7 +14,8 @@ n_mels = 40 #Anzahl MEl-Baender
 power = 2 #Exponent fuer Melspektrogram, 1 = Energie, 2 = Power
 mfccs = 20 #Anzahl zu extrahierender MFCC Features
 # moegliche werte: "MFCCS", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
-featureArt = ["Spektrum", "Melspektrum", "MFCCS"]
+#featureArt = ["Spektrum", "Melspektrum", "MFCCS"]
+featureArt = "mfCCs"
 #Pfade
 inputpath = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios'
 outputpath = '/home/schoeffler/PycharmProjects/DatenOrdnerTEST'
@@ -26,12 +27,4 @@ def main():
 
     Extraktionsfunktionen.extract(inputpath, outputpath, extraktionsParameter, featureArt)
 
-
-    #___ t b d
-    # testparameter = parameter.Parameter(n_fft,win_length, hop_length)
-    # testparameter.sayHello()
-    # testparameter.printNFFT()
-    # testparameter.checkIntegrity()
-    # testparameter.printNFFT()
-    #___ t b d
 main()

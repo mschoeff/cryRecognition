@@ -3,9 +3,9 @@ import librosa
 
 
 # #Funktion zur Auflistung der Dateien im Verzeichnis
-# def listFiles(folder):
-#     '''returns list with filenames in folder'''
-#     return os.listdir(folder)
+def listFiles(folder):
+    '''returns list with filenames in folder'''
+    return os.listdir(folder)
 
 #Funktion zur Extraktion der Audiodateien in einer Liste
 def listAudios(folder):

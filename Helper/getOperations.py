@@ -1,11 +1,16 @@
 from extractOperations import extractOperations
 from displayOperations import displayOperations
+import types
 
 
 #Funktion um eingegebene Strings zu "capitalizen"
-def capitalizeStrings(stringliste):
-    capitalizedList = [s.upper() for s in stringliste]
-    return capitalizedList
+def capitalizeStrings(input):
+    #output = 1
+    if isinstance(input, types.StringType):
+        output = input.upper()
+    if isinstance(input, types.ListType):
+        output = [s.upper() for s in input]
+    return output
 
 #Funktion um durchzufuehrende Extraktions-Operationen zu bestimmen
 def getExtractionOperations(operationString):

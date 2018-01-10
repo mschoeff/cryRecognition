@@ -1,54 +1,38 @@
 import numpy as np
-from CreateFolders import *
-from InOut import *
-from ParameterCheck import *
-from getOperations import *
-from computeSpectralFeatures import *
-from Normalisierungsfunktionen import *
-import parameter
+import FolderOperations
+import InOut
+import Normalisierungsfunktionen
+
 
 #Funktion zur Durchfuehrung der spezifischen Extraktion und Speicherung der Daten
 def extractionOfFeatures(parameter, y):
 
     feature = parameter.operationDictionary[parameter.operations](y, parameter)
-
     return feature
-
 
 #Funktion zur Abspeicherung der extrahierten Features
 def saveFeatures(value, parameter, outputFolder, filename):
 
     datafile = open(outputFolder + '/' + parameter.operations + "-Daten"+ '/' + filename + '_' + parameter.operations + '_data', 'wb')
     np.save(datafile, value)
-
-
     return None
 
 
 #Extraktionsfunktion
 def extract(inputFolder, outputFolder, parameter, stringList):
 
-    print(parameter.operations)
     parameter.setOperations(stringList)
-    print(parameter.operations)
-    print(capitalizeStrings(stringList))
-    #parameter.checkIntegrity()
-
-    audioList = listAudios(inputFolder)
-    createOutPutFolders(outputFolder, parameter)
-
-    #MFCCMatrix = createMFCCMatrix(audioList, parameter)
+    audioList = InOut.listAudios(inputFolder)
+    FolderOperations.createOutPutFolders(outputFolder, parameter)
     normalizationArray = np.empty([parameter.normalizationDictionary[parameter.operations], 1])
     timeframeSum = 0
-    print(np.shape(normalizationArray))
-
-    #to do mittwoch: np.absolute() verwenden um in array zu schreiben
 
     for file in audioList:
-        y, sr, filename = readInAudio(inputFolder, file)
+        y, sr, filename = InOut.readInAudio(inputFolder, file)
         feature = extractionOfFeatures(parameter, y)
-        print(feature.shape)
         saveFeatures(feature, parameter, outputFolder, filename)
-    #calcNormalizationFactor(MFCCMatrix, outputFolder)
+        normalizationArray, timeframeSum = Normalisierungsfunktionen.addFeatureToNormalization(feature, normalizationArray, timeframeSum)
+    Normalisierungsfunktionen.saveNormalizationArray(normalizationArray, outputFolder, parameter)
+    Normalisierungsfunktionen.saveTimeframeSum(timeframeSum, outputFolder, parameter)
 
     return None

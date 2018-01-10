@@ -22,12 +22,11 @@ functionDictionary = {
 
 }
 
+
 def main():
     functionDictionary["Addiere"](1, 2)
     functionDictionary["Subtrahiere"](10, 2)
     functionDictionary["Multipliziere"](2, 2)
     functionDictionary["Dividiere"](10., 4)
 
-    array = (1, 2, 3, 4)
-    print(sum(array))
 main()

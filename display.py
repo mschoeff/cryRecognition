@@ -1,5 +1,4 @@
-from displayParameters import displayParameter
-from Displayfunktionen import display
+import Displayfunktionen
 import parameter
 
 ## Parametereingabe zur Darstellung
@@ -21,13 +20,11 @@ file = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios/testfile.wav'
 
 
 # moegliche werte: "Audio", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
-plots = ["Audio", "Spektrum", "Melspektrum"]
+plots = ["spektrum", "melspektrum", "audio"]
 
-
-#display(file, displayParameter, plots)
 
 def main():
 
-    display(file, displayParameter, plots)
+    Displayfunktionen.display(file, displayParameter, plots)
 
 main()

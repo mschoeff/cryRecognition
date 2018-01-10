@@ -1,6 +1,7 @@
 import ParameterCheck
 import getOperations
 import computeSpectralFeatures
+import Displayfunktionen
 
 class Parameter(object):
 
@@ -34,6 +35,11 @@ class Parameter(object):
             "MELSPEKTRUM": self.n_mels,
             "MFCCS": self.mfccs
         }
+        self.displayDictionary = {
+            "AUDIO" : Displayfunktionen.displayAudio,
+            "SPEKTRUM" : Displayfunktionen.displaySpectrogram,
+            "MELSPEKTRUM" : Displayfunktionen.displayMelSpectrogram
+        }
 
     def checkIntegrity(self):
         print("checking n_fft >= win_length")
@@ -44,6 +50,9 @@ class Parameter(object):
 
     def setOperations(self, input):
         self.operations = getOperations.capitalizeStrings(input)
+
+    def numDisplayOperations(self):
+        return len(self.operations)
 
 #_______________ only for debugging__start__
     def sayHello(self):

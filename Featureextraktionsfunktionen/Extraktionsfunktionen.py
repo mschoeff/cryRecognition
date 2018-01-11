@@ -24,7 +24,8 @@ def extract(inputFolder, outputFolder, parameter, stringList):
     parameter.setOperations(stringList)
     audioList = InOut.listAudios(inputFolder)
     FolderOperations.createOutPutFolders(outputFolder, parameter)
-    normalizationArray = np.empty([parameter.normalizationDictionary[parameter.operations], 1])
+    #normalizationArray = np.empty([parameter.normalizationDictionary[parameter.operations], 1])
+    normalizationArray = np.empty([parameter.normalizationDictionary[parameter.operations] +1 , 1])
     timeframeSum = 0
 
     for file in audioList:
@@ -33,6 +34,6 @@ def extract(inputFolder, outputFolder, parameter, stringList):
         saveFeatures(feature, parameter, outputFolder, filename)
         normalizationArray, timeframeSum = Normalisierungsfunktionen.addFeatureToNormalization(feature, normalizationArray, timeframeSum)
     Normalisierungsfunktionen.saveNormalizationArray(normalizationArray, outputFolder, parameter)
-    Normalisierungsfunktionen.saveTimeframeSum(timeframeSum, outputFolder, parameter)
+    #Normalisierungsfunktionen.saveTimeframeSum(timeframeSum, outputFolder, parameter)
 
     return None

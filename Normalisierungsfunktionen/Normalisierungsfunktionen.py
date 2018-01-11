@@ -6,6 +6,7 @@ def addFeatureToNormalization(feature, normalizationArray, timeFrames):
     timeFrames += featureFrames
     for singleFeatureValue in range(featureValues):
         normalizationArray[singleFeatureValue][0] += sum(feature[singleFeatureValue])
+    normalizationArray[featureValues][0] = timeFrames
     return (normalizationArray, timeFrames)
 
 def saveNormalizationArray(normalizationArray, outputFolder, parameter):

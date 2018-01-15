@@ -6,9 +6,9 @@ def calcSamples(time, sr):
     return winLeng
 
 #Funktion um n_fft >= win_length zu gewaehrleisten
-def checkFFTSamples(n_fft, win_length, sr):
-    if calcSamples(win_length, sr) > n_fft:
-        n_fft_out = calcSamples(win_length, sr)
+def checkFFTSamples(n_fft, win_length):
+    if win_length > n_fft:
+        n_fft_out = win_length
     else:
         n_fft_out = n_fft
     return n_fft_out

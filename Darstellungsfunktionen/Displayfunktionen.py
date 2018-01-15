@@ -23,7 +23,7 @@ def displaySpectrogram(y, sr, filename, parameter):
         mp.subplot(numPlots, 1, 1)
     libdisp.specshow(D, cmap='gray_r', y_axis=parameter.freqAxis)#, x_axis='time'
     mp.colorbar(orientation='horizontal', format='%+2.0f dB')
-    mp.title(filename + ' - ' + parameter.freqAxis + ' power spectrogram')
+    mp.title(parameter.freqAxis + ' power spectrogram')
     return None
 
 #Funktion um Mel-Spektrogramm darzustellen
@@ -38,7 +38,7 @@ def displayMelSpectrogram(y, sr, filename, parameter):
         mp.subplot(numPlots, 1, 1)
     libdisp.specshow(M, cmap='gray_r', y_axis='mel') #, x_axis='time'
     mp.colorbar(orientation='horizontal', format='%+2.0f dB')
-    mp.title(filename + ' - ' + 'Mel' + ' power spectrogram')
+    mp.title('Mel' + ' power spectrogram')
     return None
 
 
@@ -46,6 +46,7 @@ def displayMelSpectrogram(y, sr, filename, parameter):
 def display(filepath, displayParameter, stringList):
 
     displayParameter.setOperations(stringList)
+    displayParameter.checkIntegrity()
     y, sr, file = InOut.readInAudioDirectly(filepath)
     [displayParameter.displayDictionary[displayOperation](y, sr, file, displayParameter) for displayOperation in displayParameter.operations]
     mp.show()

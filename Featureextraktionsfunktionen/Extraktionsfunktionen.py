@@ -10,18 +10,12 @@ def extractionOfFeatures(parameter, y):
     feature = parameter.operationDictionary[parameter.operations](y, parameter)
     return feature
 
-#Funktion zur Abspeicherung der extrahierten Features
-def saveFeatures(value, parameter, outputFolder, filename):
-
-    datafile = open(outputFolder + '/' + parameter.operations + "-Daten"+ '/' + filename + '_' + parameter.operations + '_data', 'wb')
-    np.save(datafile, value)
-    return None
-
 
 #Extraktionsfunktion
 def extract(inputFolder, outputFolder, parameter, stringList):
 
     parameter.setOperations(stringList)
+    parameter.checkIntegrity()
     audioList = InOut.listAudios(inputFolder)
     FolderOperations.createOutPutFolders(outputFolder, parameter)
     #normalizationArray = np.empty([parameter.normalizationDictionary[parameter.operations], 1])
@@ -31,7 +25,7 @@ def extract(inputFolder, outputFolder, parameter, stringList):
     for file in audioList:
         y, sr, filename = InOut.readInAudio(inputFolder, file)
         feature = extractionOfFeatures(parameter, y)
-        saveFeatures(feature, parameter, outputFolder, filename)
+        FolderOperations.saveFeatures(feature, parameter, outputFolder, filename)
         normalizationArray, timeframeSum = Normalisierungsfunktionen.addFeatureToNormalization(feature, normalizationArray, timeframeSum)
     Normalisierungsfunktionen.saveNormalizationArray(normalizationArray, outputFolder, parameter)
     #Normalisierungsfunktionen.saveTimeframeSum(timeframeSum, outputFolder, parameter)

@@ -20,7 +20,7 @@ file = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios/testfile.wav'
 
 
 # moegliche werte: "Audio", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
-plots = ["spektrum", "melspektrum", "audio"]
+plots = ["spektrum", "audio"]
 
 
 def main():

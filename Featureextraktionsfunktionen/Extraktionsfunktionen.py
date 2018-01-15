@@ -37,3 +37,15 @@ def extract(inputFolder, outputFolder, parameter, stringList):
     #Normalisierungsfunktionen.saveTimeframeSum(timeframeSum, outputFolder, parameter)
 
     return None
+
+
+
+
+### Klasse: Normalisierungsklasse
+### normalisierungsbean. 2 eigenschaften: Timeframes, Featurewerte.
+### featurewerte
+
+### Normlisierungsklasse.aktualisiereWerte
+
+
+

@@ -5,7 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Beans" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Extraction of Features" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Helper" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Visualisation" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Visualisation of Feature(s)" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Computation" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Normalisierungsfunktionen" isTestSource="false" />
     </content>

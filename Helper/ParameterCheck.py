@@ -1,4 +1,3 @@
-from getOperations import capitalizeStrings
 
 #Funktion um Sampleanzahl aus gegebener Zeitdauer und Samplingrate zu berechnen
 def calcSamples(time, sr):
@@ -13,24 +12,3 @@ def checkFFTSamples(n_fft, win_length):
         n_fft_out = n_fft
     return n_fft_out
 
-# #Funktion generiert auszufuehrende Extraktions-Operationen und ueberprueft Parameter
-# def checkExtractionParameterIntegrity(stringList, parameter):
-#     operationString = capitalizeStrings(stringList)
-#     extractionFunctions = getExtractionOperations(operationString)
-#     parameter.n_fft = checkFFTSamples(parameter.n_fft, parameter.win_length, 22050) #sr ist set to 22050 as default
-#     parameter.hop_length = calcSamples(parameter.hop_length, 22050)
-#     parameter.win_length = calcSamples(parameter.win_length, 22050)
-#
-#     #return (extractionFunctions, parameter)
-#     return extractionFunctions
-#
-# #Funktion generiert auszufuehrende Darstellungs-Operationen und ueberprueft Parameter
-# def checkDisplayParameterIntegrity(stringList, parameter):
-#     operationString = capitalizeStrings(stringList)
-#     displayFunctions = getDisplayOperations(operationString)
-#     parameter.n_fft = checkFFTSamples(parameter.n_fft, parameter.win_length, 22050) #sr ist set to 22050 as default
-#     parameter.hop_length = calcSamples(parameter.hop_length, 22050)
-#     parameter.win_length = calcSamples(parameter.win_length, 22050)
-#
-#     #return (displayFunctions, parameter)
-#     return displayFunctions

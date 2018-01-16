@@ -14,7 +14,7 @@ mfccs = 20 #Anzahl zu extrahierender MFCC Features
 
 # moegliche werte: "MFCCS", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
 #featureArt = ["Spektrum", "Melspektrum", "MFCCS"]
-featureArt = "mfccs"
+featureArt = "melSpektrum"
 
 #Pfade
 inputpath = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios'

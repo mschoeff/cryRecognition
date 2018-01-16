@@ -1,4 +1,4 @@
-import Extraktionsfunktionen
+import Extractionfunctions
 import parameter
 
 ## Parametereingabe zur Merkmalsextraktion
@@ -25,6 +25,6 @@ extraktionsParameter = parameter.Parameter(n_fft, win_length, hop_length, n_mels
 
 def main():
 
-    Extraktionsfunktionen.extract(inputpath, outputpath, extraktionsParameter, featureArt)
+    Extractionfunctions.extract(inputpath, outputpath, extraktionsParameter, featureArt)
 
 main()

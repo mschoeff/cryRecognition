@@ -1,4 +1,4 @@
-import Displayfunktionen
+import Displayfunctions
 import parameter
 
 ## Parametereingabe zur Darstellung
@@ -27,6 +27,6 @@ plots = ["spektrum", "audio", "melspektrum"]
 
 def main():
 
-    Displayfunktionen.display(file, displayParameter, plots)
+    Displayfunctions.display(file, displayParameter, plots)
 
 main()

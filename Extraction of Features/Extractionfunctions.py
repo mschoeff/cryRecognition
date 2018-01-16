@@ -2,12 +2,27 @@ import numpy as np
 import FolderOperations
 import InOut
 import Normalisierungsfunktionen
+import SpectralFeatures
 
+#Dictionary providing appropriate function for specific operation
+operationDictionary = {
+    "SPEKTRUM": SpectralFeatures.computeSpectrum,
+    "MELSPEKTRUM": SpectralFeatures.computeMelSpectrum,
+    "MFCCS": SpectralFeatures.computeMFCC
+}
+
+#Dictionary providing appropriate size for normalization Array for specific feature
+# normalizationDictionary = {
+#         "SPEKTRUM": return ()1 + parameter.n_fft / 2,
+#         "MELSPEKTRUM": melSize,
+#         "MFCCS": mfccSize
+# }
 
 #Funktion zur Durchfuehrung der spezifischen Extraktion und Speicherung der Daten
 def extractionOfFeatures(parameter, y):
 
-    feature = parameter.operationDictionary[parameter.operations](y, parameter)
+    #feature = parameter.operationDictionary[parameter.operations](y, parameter)
+    feature = operationDictionary[parameter.operations](y, parameter)
     return feature
 
 

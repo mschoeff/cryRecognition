@@ -1,8 +1,8 @@
-import librosa.display as libdisp
 import matplotlib.pyplot as mp
 import numpy as np
-import InOut
-import computeSpectralFeatures
+import SpectralFeatures
+import librosa.display as libdisp
+
 
 #Funktion um Audiodatei darzustellen
 def displayAudio(y, sr, filename, parameter):
@@ -16,7 +16,7 @@ def displayAudio(y, sr, filename, parameter):
 #Funktion um Spektrogramm darzustellen
 def displaySpectrogram(y, sr, filename, parameter):
     numPlots = len(parameter.operations)
-    D = computeSpectralFeatures.computeSpectrum(y, parameter)
+    D = SpectralFeatures.computeSpectrum(y, parameter)
     if "AUDIO" in parameter.operations:
         mp.subplot(numPlots, 1, 2)
     else:
@@ -29,7 +29,7 @@ def displaySpectrogram(y, sr, filename, parameter):
 #Funktion um Mel-Spektrogramm darzustellen
 def displayMelSpectrogram(y, sr, filename, parameter):
     numPlots = len(parameter.operations)
-    M = computeSpectralFeatures.computeMelSpectrum(y, parameter)
+    M = SpectralFeatures.computeMelSpectrum(y, parameter)
     if "SPEKTRUM" in parameter.operations and "AUDIO" in parameter.operations:
         mp.subplot(numPlots, 1, 3)
     elif "SPEKTRUM" in parameter.operations or "AUDIO" in parameter.operations:
@@ -41,13 +41,3 @@ def displayMelSpectrogram(y, sr, filename, parameter):
     mp.title('Mel' + ' power spectrogram')
     return None
 
-
-#Darstellungsfunktion
-def display(filepath, displayParameter, stringList):
-
-    displayParameter.setOperations(stringList)
-    displayParameter.checkIntegrity()
-    y, sr, file = InOut.readInAudioDirectly(filepath)
-    [displayParameter.displayDictionary[displayOperation](y, sr, file, displayParameter) for displayOperation in displayParameter.operations]
-    mp.show()
-    return None

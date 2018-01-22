@@ -34,9 +34,9 @@ def extract(inputFolder, outputFolder, parameter, stringList):
         feature = extractionOfFeatures(parameter, y)
         FolderOperations.saveFeatures(feature, parameter, outputFolder, filename)
         Normalizer.addFeature(feature)
-    Normalizer.calcArithMeans()
+    Normalizer.calcArithMeansAndStdDevs()
     #print(Normalizer.arithMeans)
-    Normalizer.saveArithMeans(parameter, outputFolder)
+    Normalizer.saveArithMeansAndStdDevs(parameter, outputFolder)
 
     return None
 

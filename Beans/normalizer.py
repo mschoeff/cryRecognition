@@ -23,23 +23,28 @@ class Normalizer(object):
         else:
             Normalizer.__instance = self
 
-        self.features = np.empty([self.normalizationDictionary[parameter.operations](parameter) + 1 , 1])
+        self.features = np.empty([self.normalizationDictionary[parameter.operations](parameter) + 1 , 2])
         self.timeframeSum = 0
+        self.arithMeans = 0
+        self.stdDevs = 0
 
     def addFeature(self, feature):
         featureValues, featureFrames = feature.shape
         self.timeframeSum += featureFrames
         for singleFeatureValue in range(featureValues):
             self.features[singleFeatureValue][0] += sum(feature[singleFeatureValue])
+            self.features[singleFeatureValue][1] += np.std(feature[singleFeatureValue]) * featureFrames
         self.features[featureValues][0] = self.timeframeSum
 
-    def calcArithMeans(self):
+    def calcArithMeansAndStdDevs(self):
         x, y = self.features.shape
         self.arithMeans = np.empty([x])
+        self.stdDevs = np.empty([x])
         for singleFeature in range(x):
             self.arithMeans[singleFeature] = self.features[singleFeature][0] / self.features[x-1][0]
+            self.stdDevs[singleFeature] = self.features[singleFeature][1] / self.features[x-1][0]
 
-    def saveArithMeans(self, parameter, outputFolder):
+    def saveArithMeansAndStdDevs(self, parameter, outputFolder):
         datafile = open(outputFolder + '/' + parameter.operations + '-Daten/' + 'Normalisierungsfaktoren_' + parameter.operations, 'wb')
-        np.save(datafile, self.arithMeans)
+        np.save(datafile, (self.arithMeans, self.stdDevs))
         return None

@@ -1,28 +1,29 @@
 import Displayfunctions
 import parameter
 
-## Parametereingabe zur Darstellung
+## Parameter section for displaying
 
-n_fft = 1024 #Werte fuer FFT [Samples]
-win_length = 10 #Fenstergroesse fuer FFT [Milli-Sekunden]
-hop_length = 10 #Sprungweite fuer FFT [Milli-Sekunden]
-window = "hann"
+n_fft = 1024 #Values to use for FFT [Samples]
+win_length = 10 #Windowsize for FFT [Milli-Sekunden]
+hop_length = 10 #Hoplength for FFT [Milli-Sekunden]
+window = "hann" #type of window to use in stft function
 symmetry = False
-freq_Axis = "linear" #Frequenzachse "linear" oder "log"
-disp_ref = n_fft #Referenzwert fuer Spektrogramm Bildung
-n_mels = 40 #Anzahl MEl-Baender
-power = 2 #Exponent fuer Melspektrogram, 1 = Energie, 2 = Power
-mfccs = 20 #Anzahl zu extrahierender MFCC Features
+freq_Axis = "linear" #frequency axis "linear" or "log"
+disp_ref = n_fft #reference value for spectrogramm
+n_mels = 40 #number of mel bands to use
+power = 2 #Exponent for Mel Spectrogram, 1 = Energy, 2 = Power
+mfccs = 20 #Number of MFCC Features to extract
 
-#Erzeugung des Objekts zur Parameterbuendelung
+#Parameters are fused in an object
 displayParameter = parameter.Parameter(n_fft, win_length, hop_length, window, symmetry, n_mels, power, mfccs, freq_Axis, disp_ref)
 
-#Pfad der darzustellenden Audio-Datei
+
+#Path to the audio file to be displayed
 file = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios/testfile.wav'
 
 
-# moegliche werte: "Audio", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
-plots = ["spektrum", "audio", "melspektrum"]
+# possible values: "Audio", "Spektrum", "Melspektrum", capitalization is not important
+plots = ["spektrum", "audio", "melspektrum", "db_spektrum"]
 
 
 def main():

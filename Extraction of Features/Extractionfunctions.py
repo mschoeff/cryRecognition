@@ -1,24 +1,23 @@
-import numpy as np
 import FolderOperations
 import InOut
-import Normalisierungsfunktionen
 import SpectralFeatures
 import normalizer
+import UnitTest
 
 #Dictionary providing appropriate function for specific operation
 operationDictionary = {
-    "SPEKTRUM": SpectralFeatures.computeSpectrum,
+    "SPEKTRUM": SpectralFeatures.computePowerSpectrogram,
     "MELSPEKTRUM": SpectralFeatures.computeMelSpectrum,
     "MFCCS": SpectralFeatures.computeMFCC
 }
 
-#Funktion zur Durchfuehrung der spezifischen Extraktion und Speicherung der Daten
+#Function that calls appropriate extraction function based on operation to be performed
 def extractionOfFeatures(parameter, y):
 
     feature = operationDictionary[parameter.operations](y, parameter)
     return feature
 
-#Extraktionsfunktion
+#Extractionfunction
 def extract(inputFolder, outputFolder, parameter, stringList):
 
     parameter.setOperations(stringList)
@@ -34,20 +33,14 @@ def extract(inputFolder, outputFolder, parameter, stringList):
         feature = extractionOfFeatures(parameter, y)
         FolderOperations.saveFeatures(feature, parameter, outputFolder, filename)
         Normalizer.addFeature(feature)
+    #
+    #A, B, check = UnitTest.testMFCCS(y, parameter)
+    #print(check)
     Normalizer.calcArithMeansAndStdDevs()
-    #print(Normalizer.arithMeans)
     Normalizer.saveArithMeansAndStdDevs(parameter, outputFolder)
 
     return None
 
-
-
-
-### Klasse: Normalisierungsklasse
-### normalisierungsbean. 2 eigenschaften: Timeframes, Featurewerte.
-### featurewerte
-
-### Normlisierungsklasse.aktualisiereWerte
 
 
 

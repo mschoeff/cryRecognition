@@ -1,27 +1,27 @@
 import Extractionfunctions
 import parameter
 
-## Parametereingabe zur Merkmalsextraktion
+## Parameter section for extraction
 
-n_fft = 512 #Werte fuer FFT [Samples]
-win_length = 40 #Fenstergroesse fuer FFT [Milli-Sekunden]
-hop_length = 40 #Sprungweite fuer FFT [Milli-Sekunden]
-window = "hann"
-symmetry = False
-n_mels = 40 #Anzahl MEl-Baender
-power = 2 #Exponent fuer Melspektrogram, 1 = Energie, 2 = Power
-mfccs = 20 #Anzahl zu extrahierender MFCC Features
+n_fft = 2048#512 #Values to use for FFT [Samples]
+win_length = 40 #Windowsize for FFT [Milli-Sekunden]
+hop_length = 40 #Hoplength for FFT [Milli-Sekunden]
+window = "hann" #type of window to use in stft function
+symmetry = True#False
+n_mels = 128 #40 #number of mel bands to use
+power = 2 #Exponent for Mel Spectrogram, 1 = Energy, 2 = Power
+mfccs = 20 #Number of MFCC Features to extract
 
 # moegliche werte: "MFCCS", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
 #featureArt = ["Spektrum", "Melspektrum", "MFCCS"]
-featureArt = "melSpektrum"
+featureArt = "spektrum"
 
 #Pfade
 inputpath = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios'
 outputpath = '/home/schoeffler/PycharmProjects/DatenOrdnerTEST'
 
 # Erzeugung des Objekts zur Parameterbuendelung
-extraktionsParameter = parameter.Parameter(n_fft, win_length, hop_length, n_mels, power, mfccs)
+extraktionsParameter = parameter.Parameter(n_fft=n_fft, win_length=win_length, hop_length=hop_length, n_mels=n_mels, power=power, mfccs=mfccs)
 
 def main():
 

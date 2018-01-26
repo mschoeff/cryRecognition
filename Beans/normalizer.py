@@ -16,35 +16,31 @@ class Normalizer(object):
         else:
             Normalizer.__instance = self
 
-        self.featureSum = np.empty([2, self.normalizationDictionary[parameter.operations](self, parameter)])
-        self.timeframeSum = 0
-        self.arithMeans = 0
-        self.stdDevs = 0
+        #for each new attribute to be "normalized": feature_Sum array dim [+1,...]
+        self.feature_Sum = np.empty([1, self.normalization_Dictionary[parameter.operations](self, parameter)])
+        self.timeframe_Sum = 0
+        self.arith_Means = 0
+        ### Standard Deviation to be implemented
+        #self.stdDevs = 0
 
-    def addFeature(self, feature):
-        featureValues, featureFrames = feature.shape
-        self.timeframeSum += featureFrames
-        self.featureSum[0][0:featureValues] += np.sum(feature, axis = 1)
-        self.featureSum[1][0:featureValues] += np.std(feature, axis = 1)
-        # for singleFeatureValue in range(featureValues):
-        #     self.features[singleFeatureValue][0] += sum(feature[singleFeatureValue])
-        #     self.features[singleFeatureValue][1] += np.std(feature[singleFeatureValue]) * featureFrames
-        #self.features[featureValues][0] = self.timeframeSum
+    def add_Feature(self, feature):
+        feature_Values, feature_Frames = feature.shape
+        self.timeframe_Sum += feature_Frames
+        self.feature_Sum[0][0:feature_Values] += np.sum(feature, axis = 1)
+        #self.featureSum[1][0:featureValues] += np.dot(np.std(feature, axis = 1), featureFrames)
+        return None
 
-    def calcArithMeansAndStdDevs(self):
-        x, y = self.featureSum.shape
-        self.arithMeans = np.empty([y])
-        self.stdDevs = np.empty([y])
+    def calc_Arith_Means(self):
+        x, y = self.feature_Sum.shape
+        self.arith_Means = np.empty([y])
+        #self.stdDevs = np.empty([y])
 
-        self.arithMeans[:y] = np.divide(self.featureSum[0][:y], self.timeframeSum)
-        self.stdDevs[:y] = np.divide(self.featureSum[1][:y], self.timeframeSum)
-        # for singleFeature in range(y):
-        #     self.arithMeans[singleFeature] = self.featureSum[0][singleFeature] / self.timeframeSum #self.features[x-1][0]
-        #     self.stdDevs[singleFeature] = self.featureSum[1][singleFeature] / self.timeframeSum #self.features[x-1][0]
+        self.arith_Means[:y] = np.divide(self.feature_Sum[0][:y], self.timeframe_Sum)
+        #self.stdDevs[:y] = np.divide(self.featureSum[1][:y], self.timeframeSum)
 
-    def saveArithMeansAndStdDevs(self, parameter, outputFolder):
-        datafile = open(outputFolder + '/' + parameter.operations + '-Daten/' + 'Normalisierungsfaktoren_' + parameter.operations, 'wb')
-        np.save(datafile, (self.arithMeans, self.stdDevs))
+    def save_Arith_Means(self, parameter, output_Folder):
+        datafile = open(output_Folder + '/' + parameter.operations + '-Daten/' + 'Normalisierungsfaktoren_' + parameter.operations, 'wb')
+        np.save(datafile, self.arith_Means) #, self.stdDevs))
         return None
 
     def stftSize(self, parameter):
@@ -57,7 +53,7 @@ class Normalizer(object):
         return parameter.mfccs
 
     #Dictionary providing appropriate size for normalization Array for specific feature
-    normalizationDictionary = {
+    normalization_Dictionary = {
             "SPEKTRUM": stftSize,
             "MELSPEKTRUM": melSize,
             "MFCCS": mfccSize

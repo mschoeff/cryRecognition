@@ -1,22 +1,22 @@
 import matplotlib.pyplot as mp
-import InOut
-import FeatureVisualisation
-import SpectralFeatures
+import In_Out
+import Feature_Visualisation
+import Spectral_Features
 
 #Dictionary providing appropriate function for specific operation
 displayDictionary = {
-    "AUDIO": FeatureVisualisation.displayAudio,
-    "SPEKTRUM": FeatureVisualisation.displaySpectrogram,
-    "MELSPEKTRUM": FeatureVisualisation.displayMelSpectrogram,
-    "DB_SPEKTRUM": FeatureVisualisation.displayDBSpectrogram
+    "AUDIO": Feature_Visualisation.displayAudio,
+    "SPEKTRUM": Feature_Visualisation.displaySpectrogram,
+    "MELSPEKTRUM": Feature_Visualisation.displayMelSpectrogram,
+    "DB_SPEKTRUM": Feature_Visualisation.displayDBSpectrogram
 }
 
 #Displayfunction
 def display(filepath, displayParameter, stringList):
 
-    displayParameter.setOperations(stringList)
-    displayParameter.checkIntegrity()
-    y, sr, file = InOut.readInAudioDirectly(filepath)
+    displayParameter.set_Operations(stringList)
+    displayParameter.check_Integrity()
+    y, sr, file = In_Out.read_In_Audio_Directly(filepath)
 
     ##displayStuff
 

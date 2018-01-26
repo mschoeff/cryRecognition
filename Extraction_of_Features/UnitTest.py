@@ -1,5 +1,5 @@
 ###Unit Test MFCC
-import SpectralFeatures
+import Spectral_Features
 import librosa
 import numpy as np
 
@@ -26,7 +26,7 @@ def testMFCCS(y, parameter):
 
 def librosaPipeline(y, parameter):
 
-    return SpectralFeatures.computeMFCC(y, parameter)
+    return Spectral_Features.compute_MFCC(y, parameter)
 
     #S = np.abs(librosa.stft(y = y, n_fft = parameter.n_fft, hop_length = parameter.hop_length))
     #P = S**parameter.power

@@ -1,6 +1,6 @@
 import types
 
-def capitalizeStrings(input):
+def capitalize_Strings(input):
     if isinstance(input, types.StringType):
         output = input.upper()
     if isinstance(input, types.ListType):

@@ -1,7 +1,7 @@
 import librosa
 import numpy as np
 
-def computePowerSpectrogram(y, parameter):
+def compute_Power_Spectrogram(y, parameter):
     #S = librosa.stft(y=y,n_fft=parameter.n_fft, hop_length=parameter.hop_length, win_length=parameter.win_length,
     #                 window = parameter.window, center = parameter.symmetry)
     #S = (np.abs(S) ** 2)/parameter.n_fft
@@ -12,22 +12,22 @@ def computePowerSpectrogram(y, parameter):
     P = S ** parameter.power
     return P
 
-def computeMelSpectrum(y, parameter):
+def compute_Mel_Spectrum(y, parameter):
     #S = computeSpectrum(y, parameter)
     #M = librosa.feature.melspectrogram(S=S, power = parameter.power, n_mels = parameter.n_mels)
-    P = computePowerSpectrogram(y, parameter)
+    P = compute_Power_Spectrogram(y, parameter)
     M = librosa.feature.melspectrogram(S=P, n_mels=parameter.n_mels)
     return M
 
-def computeMFCC(y, parameter):
-    M = computeMelSpectrum(y, parameter)
+def compute_MFCC(y, parameter):
+    M = compute_Mel_Spectrum(y, parameter)
     M = librosa.power_to_db(M, ref=1.0)
     F = librosa.feature.mfcc(S=M, n_mfcc=parameter.mfccs)
     return F
 
 
-def computeNormalizedLogSpectrogram(y, parameter):
-    P = computePowerSpectrogram(y, parameter)
+def compute_Normalized_Log_Spectrogram(y, parameter):
+    P = compute_Power_Spectrogram(y, parameter)
     P_db = librosa.power_to_db(P, ref=parameter.n_fft )
     return P_db
 

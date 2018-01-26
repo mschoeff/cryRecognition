@@ -1,6 +1,6 @@
 import matplotlib.pyplot as mp
 import numpy as np
-import SpectralFeatures
+import Spectral_Features
 import librosa.display as libdisp
 
 
@@ -15,7 +15,7 @@ def displayAudio(y, sr, filename, parameter):
 def displaySpectrogram(y, sr, filename, parameter):
     #sr and filename are defined in head of function to match the scheme of displayAudio -> unified calling is possible
     numPlots = len(parameter.operations)
-    D = SpectralFeatures.computePowerSpectrogram(y, parameter)
+    D = Spectral_Features.compute_Power_Spectrogram(y, parameter)
     if "AUDIO" in parameter.operations:
         mp.subplot(numPlots, 1, 2)
     else:
@@ -28,7 +28,7 @@ def displaySpectrogram(y, sr, filename, parameter):
 def displayMelSpectrogram(y, sr, filename, parameter):
     #sr and filename are defined in head of function to match the scheme of displayAudio -> unified calling is possible
     numPlots = len(parameter.operations)
-    M = SpectralFeatures.computeMelSpectrum(y, parameter)
+    M = Spectral_Features.compute_Mel_Spectrum(y, parameter)
     if "SPEKTRUM" in parameter.operations and "AUDIO" in parameter.operations:
         mp.subplot(numPlots, 1, 3)
     elif "SPEKTRUM" in parameter.operations or "AUDIO" in parameter.operations:
@@ -43,7 +43,7 @@ def displayMelSpectrogram(y, sr, filename, parameter):
 def displayDBSpectrogram(y, sr, filename, parameter):
     #sr and filename are defined in head of function to match the scheme of displayAudio -> unified calling is possible
     numPlots = len(parameter.operations)
-    D = SpectralFeatures.computeNormalizedLogSpectrogram(y, parameter)
+    D = Spectral_Features.compute_Normalized_Log_Spectrogram(y, parameter)
     mp.subplot(numPlots, 1, numPlots)
     libdisp.specshow(D, cmap='gray_r', y_axis=parameter.freqAxis)#, x_axis='time'
     mp.colorbar(orientation='horizontal')#, format='%+2.0f dB')

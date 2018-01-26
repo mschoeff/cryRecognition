@@ -1,10 +1,10 @@
-import ParameterCheck
-import getOperations
+import Parameter_Check
+import get_Operations
 
 class Parameter(object):
 
     def __init__(self, n_fft=512, win_length=40, hop_length=40, window = "hann", symmetry = False, n_mels=40, power=2,
-                     mfccs=20, freqAxis='linear', dispRef=512, operations = "SPEKTRUM"):
+                 mfccs=20, freq_Axis='linear', disp_Ref=512, operations ="SPEKTRUM"):
 
         self.n_fft = n_fft
         self.win_length = win_length
@@ -14,22 +14,22 @@ class Parameter(object):
         self.n_mels = n_mels
         self.power = power
         self.mfccs = mfccs
-        self.freqAxis = freqAxis
-        self.dispRef = dispRef
+        self.frequency_Axis = freq_Axis
+        self.display_Reference = disp_Ref
         self.operations = operations
-        self.normalizationDictionary = {
+        self.normalization_Dictionary = {
             "SPEKTRUM": 1 + self.n_fft / 2,
             "MELSPEKTRUM": self.n_mels,
             "MFCCS": self.mfccs
         }
 
-    def checkIntegrity(self):
-        self.win_length = 2048#ParameterCheck.calcSamples(self.win_length, 22050)
-        self.hop_length = 512#ParameterCheck.calcSamples(self.hop_length, 22050)
-        self.n_fft = 2048#ParameterCheck.checkFFTSamples(self.n_fft, self.win_length)
+    def check_Integrity(self):
+        self.win_length = Parameter_Check.calc_Samples(self.win_length, 22050)
+        self.hop_length = Parameter_Check.calc_Samples(self.hop_length, 22050)
+        self.n_fft = Parameter_Check.check_FFT_Samples(self.n_fft, self.win_length)
 
-    def setOperations(self, input):
-        self.operations = getOperations.capitalizeStrings(input)
+    def set_Operations(self, input):
+        self.operations = get_Operations.capitalize_Strings(input)
 
-    def numDisplayOperations(self):
+    def number_Display_Operations(self):
         return len(self.operations)

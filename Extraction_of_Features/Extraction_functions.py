@@ -4,16 +4,17 @@ import Spectral_Features
 import normalizer
 
 #Dictionary providing appropriate function for specific operation
-operationDictionary = {
+operation_Dictionary = {
     "SPEKTRUM": Spectral_Features.compute_Power_Spectrogram,
     "MELSPEKTRUM": Spectral_Features.compute_Mel_Spectrum,
-    "MFCCS": Spectral_Features.compute_MFCC
+    "MFCCS": Spectral_Features.compute_MFCC,
+    "DB_SPEKTRUM": Spectral_Features.compute_Normalized_Log_Spectrogram
 }
 
 #Function that calls appropriate extraction function based on operation to be performed
 def extraction_of_Features(parameter, y):
 
-    feature = operationDictionary[parameter.operations](y, parameter)
+    feature = operation_Dictionary[parameter.operations](y, parameter)
     return feature
 
 #Extractionfunction

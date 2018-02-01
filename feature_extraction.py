@@ -6,7 +6,7 @@ import parameter
 n_fft = 512 #Values to use for FFT [Samples]
 win_length = 40 #Windowsize for FFT [Milli-Sekunden]
 hop_length = 40 #Hoplength for FFT [Milli-Sekunden]
-window = "hann" #type of window to use in stft function
+window = "hamm" #type of window to use in stft function
 symmetry = False
 n_mels = 40 #number of mel bands to use
 power = 2 #Exponent for Mel Spectrogram, 1 = Energy, 2 = Power
@@ -14,7 +14,7 @@ mfccs = 20 #Number of MFCC Features to extract
 
 # moegliche werte: "MFCCS", "Spektrum", "Melspektrum", Gross-/Kleinschreibung egal
 #featureArt = ["Spektrum", "Melspektrum", "MFCCS"]
-feature_type = "mfccs"
+feature_type = "spektrum"
 
 #Pfade
 input_path = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios'

@@ -1,41 +1,40 @@
 import matplotlib.pyplot as mp
+import numpy as np
 import In_Out
-import Feature_Visualisation
-import Spectral_Features
-
-#Dictionary providing appropriate function for specific operation
-displayDictionary = {
-    "AUDIO": Feature_Visualisation.displayAudio,
-    "SPEKTRUM": Feature_Visualisation.displaySpectrogram,
-    "MELSPEKTRUM": Feature_Visualisation.displayMelSpectrogram,
-    "DB_SPEKTRUM": Feature_Visualisation.displayDBSpectrogram
-}
+import Extraction_functions
+import librosa.display as libdisp
 
 #Displayfunction
-def display(filepath, displayParameter, stringList):
+def display(filepath, parameter, stringList):
 
-    displayParameter.set_Operations(stringList)
-    displayParameter.check_Integrity()
+    parameter.set_Operations(stringList)
+    parameter.check_Integrity()
     y, sr, file = In_Out.read_In_Audio_Directly(filepath)
 
-    ##displayStuff
+    visualize_features(y, sr, file, parameter)
 
-    [displayDictionary[displayOperation](y, sr, file, displayParameter) for displayOperation in displayParameter.operations]
     mp.show()
     return None
 
-#def displaystuff(y, sr, file, displayParameter):
+def visualize_features(y, sr, file, parameter):
+    number_of_plots = len(parameter.operations)
+    for operation in parameter.operations:
+        mp.subplot(number_of_plots, 1, parameter.operations.index(operation)+1)
+        if 'AUDIO' in operation:
+            displayAudio(y, sr, file)
+        else:
+            feature = Extraction_functions.operation_Dictionary[operation](y, parameter)
+            display_single_feature(feature, parameter, operation)
+    return None
 
- #   for operation in displayParameter.operationDictionary:
+def display_single_feature(y, parameter, operation):
+    libdisp.specshow(y, cmap = 'gray_r', y_axis = parameter.display_Dictionary[operation])
+    mp.colorbar(orientation='horizontal')
+    mp.title(parameter.display_Dictionary[operation] + '-scaled frequency axis ' + operation)
+    return None
 
-        #nackte featurewerte berecvhnen, genauso wie dus bei der featureextarction machst!
-    #    feature = welcheFunktionAuchImmerdieFeaturesBerechnet[operation]
-
-        #berechnen, wo der subplot hinwandern muss. Ergibt sich funktional aus pos in liste und | operations |
-    #    subplot(berechneWohin)
-
-        ## display tatsaechlich aufrufen. In dieser Funktion drin werden, in abhaengigkeit zu der uebergebenen operation, die die
-        ## displayparameter berechnet. beispiel: Immer, wenn "db_spektrum" kommt, schreib "DB-spektrum" drueber und eine db-skale drunter.
-        ## vielleicht erfindest du dafuer eine extra dictionary.
-
-   #     RufeLibrosaDisplayFunktionAuf(feature, operation)
+def displayAudio(y, sr, filename):
+    mp.title(filename)
+    time = np.linspace(0, len(y)/sr, len(y))
+    mp.plot(time, y)
+    return None

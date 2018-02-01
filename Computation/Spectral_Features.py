@@ -8,8 +8,10 @@ def compute_Power_Spectrogram(y, parameter):
     #S = 20 * np.log10((abs(S)**2)/parameter.dispRef)
     #S = librosa.amplitude_to_db(S, ref=1)#parameter.n_fft)
 
-    S = np.abs(librosa.stft(y=y, n_fft=parameter.n_fft, hop_length=parameter.hop_length))
+    S = np.abs(librosa.stft(y=y, n_fft=parameter.n_fft, hop_length=parameter.hop_length, win_length=parameter.win_length,
+                            window=parameter.window, center=parameter.symmetry))
     P = S ** parameter.power
+
     return P
 
 def compute_Mel_Spectrum(y, parameter):

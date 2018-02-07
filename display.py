@@ -1,3 +1,4 @@
+#import ./Visualisation_of_Features/Displayfunctions
 import Displayfunctions
 import parameter
 
@@ -25,7 +26,7 @@ file = '/home/schoeffler/PycharmProjects/spectrogram_1/Audios/testfile.wav'
 
 
 # possible values: "Audio", "Spektrum", "Melspektrum", capitalization is not important
-plots = ["audio", "db_spektrum", "spektrum"]
+plots = ["audio", "db_spektrum", "spektrum", "melspektrum", "mfccs"]
 
 
 def main():

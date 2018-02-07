@@ -25,7 +25,8 @@ class Parameter(object):
         self.display_Dictionary = {
             "SPEKTRUM": self.frequency_Axis,
             "MELSPEKTRUM": 'mel',
-            "DB_SPEKTRUM": self.frequency_Axis
+            "DB_SPEKTRUM": self.frequency_Axis,
+            "MFCCS": self.frequency_Axis
         }
 
 
